@@ -1,3 +1,4 @@
-# Gwiazdy
-Zaliczeniowy projekt "Gwiazdy" na zajęcia z programowania w Javie.
-Autor: Przemysław Kocur
+# Gwiazdy-2
+An improved version of "Gwiazdy" project for university classes.
+
+**Author: Przemysław Kocur / Karol Krawczyk**
