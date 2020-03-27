@@ -1,5 +1,10 @@
 package pl.pk99.gwiazdy;
 
+import pl.pk99.gwiazdy.model.Deklinacja;
+import pl.pk99.gwiazdy.model.Gwiazda;
+import pl.pk99.gwiazdy.model.Gwiazdozbior;
+import pl.pk99.gwiazdy.model.Rektascensja;
+
 import java.util.Scanner;
 
 //Klasa menu, służy do nawigacji po programie za pomocą instrukcji przekazywanych
@@ -63,20 +68,7 @@ class Menu {
     }
 
     private void wyjdz() {
-        System.out.println("Czy zapisać zmiany? " +
-                "\n[1] - Zapisz zmiany \n[2] - Nie zapisuj zmian");
-
-        switch (sc.nextLine()) {
-            case "1": {
-                GwiazdyManager.zapiszGwiazdy();
-                System.exit(0);
-                break;
-            }
-            case "2": {
-                System.exit(0);
-                break;
-            }
-        }
+        System.exit(0);
     }
 
     private void menuSzukajGwiazd() {
@@ -189,7 +181,7 @@ class Menu {
                 String nazwa = sc.nextLine();
 
                 System.out.println("Wprowadź nazwę gwiazdozbioru:");
-                String nazwaG = sc.nextLine();
+                Gwiazdozbior gwiazdozbior = new Gwiazdozbior(sc.nextLine());
 
                 ObserwowanaWielkoscGwiazdowa owg;
 
@@ -239,7 +231,7 @@ class Menu {
                 System.out.println("Wprowadź masę gwiadzy w odniesieniu do masy Słońca (od 0.1 do 50):");
                 Masa masa = new Masa(Double.parseDouble(sc.nextLine()));
 
-                Gwiazda g = new Gwiazda(nazwa, nazwaG, owg, odleglosc, polnocna, deklinacja, rektascensja, temperatura, masa);
+                Gwiazda g = new Gwiazda(nazwa, gwiazdozbior, owg, odleglosc, polnocna, deklinacja, rektascensja, temperatura, masa);
 
                 GwiazdyManager.dodajGwiazde(g);
 

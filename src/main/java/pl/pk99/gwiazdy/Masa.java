@@ -1,9 +1,9 @@
 package pl.pk99.gwiazdy;
 
-class Masa implements java.io.Serializable {
+public class Masa implements java.io.Serializable {
     private double masa;
 
-    Masa(double masa) {
+    public Masa(double masa) {
         if(masa >= 0.1 && masa <= 50) {
             this.masa = masa;
         } else {
@@ -12,7 +12,7 @@ class Masa implements java.io.Serializable {
 
     }
 
-    double get() {
+    public double get() {
         return masa;
     }
 }
