@@ -1,4 +1,4 @@
-package pl.pk99.gwiazdy.conventers;
+package pl.pk99.gwiazdy.conventer;
 
 import pl.pk99.gwiazdy.Masa;
 

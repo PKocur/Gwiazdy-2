@@ -30,8 +30,8 @@
         <mapping class="pl.pk99.gwiazdy.model.Rektascensja"/>
         <mapping class="pl.pk99.gwiazdy.model.Gwiazdozbior"/>
         <!-- Converters -->
-        <mapping class="pl.pk99.gwiazdy.conventers.MasaConverter"/>
-        <mapping class="pl.pk99.gwiazdy.conventers.TemperaturaConverter"/>
-        <mapping class="pl.pk99.gwiazdy.conventers.ObserwowanaWielkoscGwiazdowaConverter"/>
+        <mapping class="pl.pk99.gwiazdy.conventer.MasaConverter"/>
+        <mapping class="pl.pk99.gwiazdy.conventer.TemperaturaConverter"/>
+        <mapping class="pl.pk99.gwiazdy.conventer.ObserwowanaWielkoscGwiazdowaConverter"/>
     </session-factory>
 </hibernate-configuration>

@@ -168,7 +168,6 @@ public class Gwiazda implements java.io.Serializable {
 
     @Override
     public String toString() {
-        System.out.println();
         return ("----------------------------------") +
                 "\nNazwa: " + nazwa + "\nNazwa katalogowa: " + nazwaKatalogowa +
                 "\nDeklinacja: " + deklinacja.toString() +
@@ -179,7 +178,7 @@ public class Gwiazda implements java.io.Serializable {
                 "\nMasa: " + masa.get() + " masy Słońca" +
                 "\nObserwowana wielkość gwiazdowa: " + obserowanaWielkoscGwiazdowa.get() +
                 "\nAbsolutna wielkość gwiazdowa: " + absolutnaWielkoscGwiazdowa +
-                "\n----------------------------------";
+                "\n----------------------------------\n";
     }
 
     @Override

@@ -6,7 +6,8 @@ import java.util.Objects;
 @Entity
 @Table(name = "Deklinacje")
 public class Deklinacja implements java.io.Serializable {
-    private double stopnie, minuty, sekundy;
+    private double sekundy;
+    private int stopnie, minuty;
     @Id
     private int id;
     @OneToOne
@@ -56,15 +57,15 @@ public class Deklinacja implements java.io.Serializable {
         if (this == o) return true;
         if (!(o instanceof Deklinacja)) return false;
         Deklinacja that = (Deklinacja) o;
-        return Double.compare(that.stopnie, stopnie) == 0 &&
-                Double.compare(that.minuty, minuty) == 0 &&
-                Double.compare(that.sekundy, sekundy) == 0 &&
+        return Double.compare(that.sekundy, sekundy) == 0 &&
+                stopnie == that.stopnie &&
+                minuty == that.minuty &&
                 id == that.id &&
                 Objects.equals(gwiazda, that.gwiazda);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(stopnie, minuty, sekundy, id, gwiazda);
+        return Objects.hash(sekundy, stopnie, minuty, id, gwiazda);
     }
 }

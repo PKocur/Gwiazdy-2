@@ -13,8 +13,7 @@ import java.util.*;
 //funkcjonalności, które na bazie możemy wykonywać (dodawanie, usuwanie oraz
 //wyszukiwanie i wyświetlanie gwiazd)
 
-
-abstract class GwiazdyManager {
+public abstract class GwiazdyManager {
     static private List<Gwiazda> gwiazdy = new ArrayList<Gwiazda>();
     static private List<Gwiazdozbior> gwiazdozbiory = new ArrayList<Gwiazdozbior>();
     static private String sciezkaZapisuBazy = "gwiazdy.mv.db";
@@ -23,71 +22,57 @@ abstract class GwiazdyManager {
         return new File(sciezkaZapisuBazy).exists();
     }
 
-    static void wyswietlGwiazdy() {
+    public static String wyswietlGwiazdy() {
+        StringBuilder gwiazdyToString = new StringBuilder();
         for (Gwiazda g : gwiazdy) {
-            System.out.println(g.toString());
+            gwiazdyToString.append(g.toString());
         }
+        return gwiazdyToString.toString();
     }
 
-    static void znajdzGwiazdyWGwiazdozbiorze(String gwiazdozbior) {
-        Object[] wyszukaneGwiazdy = gwiazdy.stream()
-                .filter(g -> g.getGwiazdozbior().getNazwa().equalsIgnoreCase(gwiazdozbior)).toArray();
-
-        wyswietlZnalezioneGwiazdy(wyszukaneGwiazdy);
-    }
-
-    static void znajdzGwiazdyWOdleglosci(double pc) {
-        Object[] wyszukaneGwiazdy = gwiazdy.stream()
-                .filter(g -> g.getOdleglosc() * 0.3066 <= pc).toArray();
-
-        wyswietlZnalezioneGwiazdy(wyszukaneGwiazdy);
-    }
-
-    static void znajdzGwiazdyOTemperaturaturze(double tempMin, double tempMax) {
-        Object[] wyszukaneGwiazdy = gwiazdy.stream()
-                .filter(g -> g.getTemperatura().get() >= tempMin
-                        && g.getTemperatura().get() <= tempMax).toArray();
-
-        wyswietlZnalezioneGwiazdy(wyszukaneGwiazdy);
-    }
-
-    static void znajdzGwiazdyOAbsolutnejWielkosciGwiazdowej(double wgMin, double wgMax) {
-        Object[] wyszukaneGwiazdy = gwiazdy.stream()
-                .filter(g -> g.getAbsolutnaWielkoscGwiazdowa() >= wgMin
-                        && g.getAbsolutnaWielkoscGwiazdowa() <= wgMax).toArray();
-
-        wyswietlZnalezioneGwiazdy(wyszukaneGwiazdy);
-    }
-
-    static void znajdzGwiazdyNaPolkuli(boolean polnocna) {
-        Object[] wyszukaneGwiazdy = gwiazdy.stream()
-                .filter(g -> g.isPolnocna() == polnocna).toArray();
-
-        wyswietlZnalezioneGwiazdy(wyszukaneGwiazdy);
-    }
-
-    static void znajdzGwiazdyPotencjalneSupernowe() {
-        Object[] wyszukaneGwiazdy = gwiazdy.stream()
-                .filter(g -> g.getMasa().get() > 1.44).toArray();
-
-        wyswietlZnalezioneGwiazdy(wyszukaneGwiazdy);
-    }
-
-    /**
-     * Metoda wyświetla znalezione gwiazdy
-     *
-     * @param wyszukaneGwiazdy tablica obiektów, które mają zostać wyświetlone
-     *                         przez metodę
-     */
-
-    private static void wyswietlZnalezioneGwiazdy(Object[] wyszukaneGwiazdy) {
+    public static String wyswietlGwiazdy(Object[] wyszukaneGwiazdy) {
+        StringBuilder gwiazdyToString = new StringBuilder();
         if (wyszukaneGwiazdy.length == 0) {
             System.out.println("Nie znaleziono gwiazd spełniających zadane kryteria");
         } else {
             for (Object g : wyszukaneGwiazdy) {
-                System.out.println(g.toString());
+                gwiazdyToString.append(g.toString());
             }
         }
+        return gwiazdyToString.toString();
+    }
+
+
+    public static Object[] znajdzGwiazdyWGwiazdozbiorze(String gwiazdozbior) {
+        return gwiazdy.stream()
+                .filter(g -> g.getGwiazdozbior().getNazwa().equalsIgnoreCase(gwiazdozbior)).toArray();
+    }
+
+    public static Object[] znajdzGwiazdyWOdleglosci(double pc) {
+        return gwiazdy.stream()
+                .filter(g -> g.getOdleglosc() * 0.3066 <= pc).toArray();
+    }
+
+    public static Object[] znajdzGwiazdyOTemperaturaturze(double tempMin, double tempMax) {
+        return gwiazdy.stream()
+                .filter(g -> g.getTemperatura().get() >= tempMin
+                        && g.getTemperatura().get() <= tempMax).toArray();
+    }
+
+    public static Object[] znajdzGwiazdyOAbsolutnejWielkosciGwiazdowej(double wgMin, double wgMax) {
+        return gwiazdy.stream()
+                .filter(g -> g.getAbsolutnaWielkoscGwiazdowa() >= wgMin
+                        && g.getAbsolutnaWielkoscGwiazdowa() <= wgMax).toArray();
+    }
+
+    public static Object[] znajdzGwiazdyNaPolkuli(boolean polnocna) {
+        return gwiazdy.stream()
+                .filter(g -> g.isPolnocna() == polnocna).toArray();
+    }
+
+    public static Object[] znajdzGwiazdyPotencjalneSupernowe() {
+        return gwiazdy.stream()
+                .filter(g -> g.getMasa().get() > 1.44).toArray();
     }
 
     /**
@@ -106,7 +91,7 @@ abstract class GwiazdyManager {
      * @param gwiazda obiekt gwiazdy, który ma zostać dodany do kolekcji
      */
 
-    static void dodajGwiazde(Gwiazda gwiazda) {
+    public static void dodajGwiazde(Gwiazda gwiazda) {
         gwiazda.setGwiazdozbior(znajdzGwiazdozbior(gwiazda));
         gwiazda.utworzNazweKatalogowa();
         gwiazdy.add(gwiazda);
@@ -115,7 +100,7 @@ abstract class GwiazdyManager {
 
     /**
      * Metoda zwraca poprawny gwiazdozbiór do danej gwiazdy (tworzy nowy
-     * gwiazdozbiór, jeśli ten jeszcze nie istnieje w bazie, bądź zwraca
+     * gwiazdozbiór - jeśli ten jeszcze nie istnieje w bazie - bądź zwraca
      * już istniejący)
      *
      * @param gwiazda obiekt gwiazdy, dla którego szukamy poprawnego gwiazdozbioru
@@ -137,7 +122,7 @@ abstract class GwiazdyManager {
      * @param nazwaKatalogowa nazwa katalogowa gwiazdy, która ma zostać usunięta
      */
 
-    static boolean usunGwiazde(String nazwaKatalogowa) {
+    public static boolean usunGwiazde(String nazwaKatalogowa) {
         boolean usunieta = false;
         int gwiazdozbiorID = 0;
         for (Gwiazda gwiazda : gwiazdy) {
