@@ -99,6 +99,22 @@ public abstract class GwiazdyManager {
     }
 
     /**
+     * Metoda dodaje wiele gwiazd do listy, ustawia ich gwiazdozbiór i nazwę katalogową
+     *
+     * @param gwiazdy obiekty gwiazd, które mają zostać dodane do kolekcji
+     */
+
+    public static void dodajGwiazdy(Collection<? extends Gwiazda> gwiazdy) {
+        for(Gwiazda g : gwiazdy) {
+            g.setGwiazdozbior(znajdzGwiazdozbior(g));
+            g.utworzNazweKatalogowa();
+            GwiazdyManager.gwiazdy.add(g);
+        }
+        GwiazdyDatabaseManager.zapiszDoBazyWszystkie(gwiazdy);
+    }
+
+
+    /**
      * Metoda zwraca poprawny gwiazdozbiór do danej gwiazdy (tworzy nowy
      * gwiazdozbiór - jeśli ten jeszcze nie istnieje w bazie - bądź zwraca
      * już istniejący)
@@ -223,10 +239,7 @@ public abstract class GwiazdyManager {
         gwiazdy.add(new Gwiazda("KMD7903", gwiazdozbior3, owg6, 82.47, true,
                 d6, r6, t6, m6));
 
-        for (Gwiazda gwiazda : gwiazdy) {
-            GwiazdyManager.dodajGwiazde(gwiazda);
-        }
-
+        dodajGwiazdy(gwiazdy);
         GwiazdyManager.gwiazdozbiory.addAll(gwiazdozbiory);
     }
 

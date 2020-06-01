@@ -6,6 +6,7 @@ import org.hibernate.Transaction;
 import pl.pk99.gwiazdy.model.Gwiazda;
 import pl.pk99.gwiazdy.model.Gwiazdozbior;
 
+import java.util.Collection;
 import java.util.List;
 
 //Klasa bezpośrednio zarządza bazą danych (umożliwia zapisywanie, usuwanie oraz wczytywanie gwiazd z bazy)
@@ -37,6 +38,22 @@ public abstract class GwiazdyDatabaseManager {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
             transaction = session.beginTransaction();
             session.save(gwiazda);
+            transaction.commit();
+        } catch (Exception e) {
+            if (transaction != null) {
+                transaction.rollback();
+            }
+            e.printStackTrace();
+        }
+    }
+
+    public static void zapiszDoBazyWszystkie(Collection<? extends Gwiazda> gwiazdy) {
+        Transaction transaction = null;
+        try (Session session = HibernateUtil.getSessionFactory().openSession()) {
+            transaction = session.beginTransaction();
+            for(Gwiazda g : gwiazdy) {
+                session.save(g);
+            }
             transaction.commit();
         } catch (Exception e) {
             if (transaction != null) {

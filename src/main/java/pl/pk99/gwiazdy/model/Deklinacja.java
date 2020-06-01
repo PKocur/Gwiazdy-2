@@ -14,6 +14,18 @@ public class Deklinacja implements java.io.Serializable {
     @MapsId
     private Gwiazda gwiazda;
 
+    public double getSekundy() {
+        return sekundy;
+    }
+
+    public int getStopnie() {
+        return stopnie;
+    }
+
+    public int getMinuty() {
+        return minuty;
+    }
+
     public int getId() {
         return id;
     }
@@ -29,6 +41,8 @@ public class Deklinacja implements java.io.Serializable {
     public void setId(int id) {
         this.id = id;
     }
+
+
 
     public Deklinacja () {
 

@@ -17,12 +17,16 @@ public class Rektascensja implements java.io.Serializable {
     @MapsId
     private Gwiazda gwiazda;
 
-    public void setId(int id) {
-        this.id = id;
+    public int getGodziny() {
+        return godziny;
     }
 
-    public void setGwiazda(Gwiazda gwiazda) {
-        this.gwiazda = gwiazda;
+    public int getMinuty() {
+        return minuty;
+    }
+
+    public int getSekundy() {
+        return sekundy;
     }
 
     public int getId() {
@@ -31,6 +35,14 @@ public class Rektascensja implements java.io.Serializable {
 
     public Gwiazda getGwiazda() {
         return gwiazda;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setGwiazda(Gwiazda gwiazda) {
+        this.gwiazda = gwiazda;
     }
 
     public Rektascensja () {
